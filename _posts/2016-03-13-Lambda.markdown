@@ -2,8 +2,7 @@
 layout: post
 title: C++11新特性01:Lambda表达式
 author: 徐强明
-data: 2016-3-12
-
+data: 2016-03-12
 ---
 
 本文主要介绍的是 Lambda 表达式的简单用法。
@@ -14,7 +13,7 @@ data: 2016-3-12
 
 # 代码实例
 
-```c++
+```
 float f0 = 1.0;
 std::cout << [=](float f) mutable { return f0 += std::abs(f); } (-3.5);
 std::cout << '\n' << f0 << '\n';
