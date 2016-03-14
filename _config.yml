@@ -13,10 +13,13 @@ location: 32°2'38"N   118°46'43"E
 ##Make sure to edit the above fields, especially for disqus.
 encoding: utf-8
 
-markdown: kramdown
-kramdown:
-  input: GFM
-  syntax_highlighter: rouge
+#markdown: kramdown
+highlighter: pygments
+markdown: redcarpet
+extensions: ["fenced_code_blocks", "tables", "highlight", "strikethrough"] 
+#kramdown:
+#  input: GFM
+#  syntax_highlighter: rouge
 
 defaults:
   - scope:
