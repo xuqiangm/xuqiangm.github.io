@@ -1,0 +1,49 @@
+---
+title: C++11新特性：Lambda表达式
+date: 2016-03-14
+categories: c++
+---
+
+
+本文将介绍 C++11 中的一个新特性 Lambda 表达式,C++11引入了Lambda表达式，使得C++11增加了函数式编程范性的一面。这样C++就支持更多的范型编程，包括基于命令式编程范型的C语言部分，面向对象编程范型的部分以及函数式编程范型。
+
+# Lambda表达式基础
+
+$ [capture](parameters) mutable ->return-typr{statement} $
+
+各参数的含义
+
+- \[capture\]：捕捉列表，同时也是lambda引出符
+- \[parameters\]：参数列表，如果不需要参数传递，则可以省略
+- mutable：mutable修饰符。默认情况下，lambda 函数总是一个 const 函数，mutable 可以取消其常量性。在使用该修饰符时，参数列表不可省略。
+- ->return-type: 返回类型。用追踪返回类型形式声明函数的返回类型。可以省略，编译器可以对返回类型进行推导。
+- {statement}: 函数体。内容与普通函数一样，不过除了可以使用参数外，还乐意使用所有捕获的变量。
+最简略的lambda函数只需要声明为
+
+```
+[]{}
+```
+
+简单的，可以有下这个例子说明下基本写法
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main(){
+	[] {};//最简 Lambda 函数
+
+	int a = 3;
+	int b = 4;
+	[=] {return a+b;};   //省略了参数列表和返回类型，捕捉a,b按值传入
+
+	auto totalChild = [](int x, int y)->int{ return x+y;};
+	cout<<totalChild(1,4)<<endl;	//一般的写法
+
+	int boys =4, girls = 3;
+	auto total = [=]()->int{ return girls+boys+a+b+c; }; //捕获所有父作业域的变量，并按值传入,c无法被捕捉，报错
+	int c = 5;
+	cout<<total()<<endl;
+	return 0;
+}
+```
