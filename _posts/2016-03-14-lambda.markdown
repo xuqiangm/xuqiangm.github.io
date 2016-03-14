@@ -26,7 +26,7 @@ $ [capture](parameters) mutable ->return-typr{statement} $
 
 简单的，可以有下这个例子说明下基本写法
 
-```c++
+~~~ cpp
 #include <iostream>
 using namespace std;
 
@@ -46,4 +46,4 @@ int main(){
 	cout<<total()<<endl;
 	return 0;
 }
-```
+~~~
