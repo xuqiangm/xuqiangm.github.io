@@ -1,22 +1,21 @@
-name: Herring Cove
+name: 徐强明
 author: Herring Cove
-baseurl: /
-description: theme for jekyll
-github: http://www.github.com/arnp
+baseurl: 
+description: 枕上诗书闲处好，窗前风景雨时佳
+github: http://www.github.com/xuqiangm
 twitter: http://www.twitter.com/
 facebook: http://www.facebook.com
 linkedin: http://www.linkedin.com
-email: rnpatel[at]me.com
-location: 42°2'16"N   70°12'47"W
-disqus: diqus-username
+email: xuqiangm@gmail.com
+#location: 42°2'16"N   70°12'47"W
+#disqus: diqus-username
 
 ##Make sure to edit the above fields, especially for disqus.
 
-
-highlighter: pygments
-markdown: redcarpet
-redcarpet:
-  extensions: ["tables"]
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
 defaults:
   - scope:
