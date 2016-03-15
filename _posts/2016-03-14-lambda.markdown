@@ -9,7 +9,7 @@ categories: c++
 
 # 1. Lambda表达式基础
 
-> [capture] (parameters) mutable -> return-type {statement}
+> \[capture\] (parameters) mutable -> return-type {statement}
 
 各参数的含义
 
