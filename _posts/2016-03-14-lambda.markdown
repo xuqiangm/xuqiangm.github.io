@@ -41,7 +41,7 @@ int main(){
 	cout<<totalChild(1,4)<<endl;	//一般的写法
 
 	int boys =4, girls = 3;
-	auto total = [=]()->int{ return girls+boys+a+b+c; }; //捕获所有父作业域的变量，并按值传入,c无法被捕捉，报错
+	auto total = [=]()->int{ return girls+boys+a+b+c; }; //捕获所有父作用域的变量，并按值传入,c无法被捕捉，报错
 	int c = 5;
 	cout<<total()<<endl;
 	return 0;
