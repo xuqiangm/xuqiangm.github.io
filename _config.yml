@@ -32,3 +32,8 @@ defaults:
       type: "posts"
     values:
       layout: "post"
+
+comments :
+  provider : duoshuo
+  duoshuo :
+    short_name : xqm
