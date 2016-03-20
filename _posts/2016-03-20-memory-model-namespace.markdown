@@ -19,6 +19,7 @@ C++ 使用三种（C++11中增加到4种）不同的方案来存储数据，这�
 接下来将会依次介绍这三种存储方案
 
 不过在介绍这些之前，我们需要了解3种连接性：
+
 - 外部链接性：可在其它文件中访问
 - 内部连接性：只能在当前文件中访问
 - 无链接性：只能在当前函数或代码块中访问
@@ -55,12 +56,11 @@ int main(){
 	return 0;
 }
 ```
-
-![](http://7xrvqe.com1.z0.glb.clouddn.com/16-03-20-memory-model-namespace-stack%E4%BD%BF%E7%94%A8%E6%A0%88%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0.png)
+![](http://7xrvqe.com1.z0.glb.clouddn.com/16-03-20-memory-model-namespace%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png)
 
 由于自动变量的数目随函数的开始和结束而增减，因此程序必须在运行时自动变量进行管理，常见的是使用栈来进行管理，下图截自《C++ Primer Plus（第6版）》308页，该图可以形象生动的说明其中的过程
 
-![](http://7xrvqe.com1.z0.glb.clouddn.com/16-03-20-memory-model-namespace%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png)
+![](http://7xrvqe.com1.z0.glb.clouddn.com/16-03-20-memory-model-namespace-stack%E4%BD%BF%E7%94%A8%E6%A0%88%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0.png)
 
 最后，关于自动存储持续性，还有一点需要说明的是，可以使用 register 显式地指出变量是自动的， register 以前是用来建议编译器使用 CPU 寄存器来存储自动变量的，C++11 后废弃了这个用法，而成为指出变量是自动的关键字。
 
@@ -74,7 +74,9 @@ int main(){
 静态，外部链接性 | 静态 | 文件 | 外部 | 不在任何函数内
 静态，内部链接性 | 静态 | 文件 | 内部 | 不在任何函数内，使用关键字 static
 
-不过，在介绍着三种之前，
+不过，在介绍着三种之前，关于静态变量的初始化，还是有必要说一下的。
+
+
 
 # 命名空间
 
