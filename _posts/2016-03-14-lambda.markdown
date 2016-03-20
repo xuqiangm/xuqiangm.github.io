@@ -83,7 +83,7 @@ int main(){
 ```
 
 运行结果：
-![](http://7xrvqe.com1.z0.glb.clouddn.com/16-3-15/28253622.jpg)
+![](http://7xrvqe.com1.z0.glb.clouddn.com/16-3-1411.png)
 
 # 2. Lambda 与函数对象
 首先认识一下函数对象，函数对象其实就是重新定义了成员函数 operator() 的一种自定义类型对象，并且在使用的时候在代码层面跟函数的使用一样，虽然本质是不同的。

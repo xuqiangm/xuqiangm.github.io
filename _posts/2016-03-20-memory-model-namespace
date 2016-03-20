@@ -1,0 +1,67 @@
+---
+title: 内存模型和命名空间
+date: 2016-03-20
+categories: c++
+---
+
+一直以来对内存模型的认识总是从很局部的，想着还是需要总结梳理一下的，所以阅读了《C++ Prime Plus(第六版)》中的第9章，本文主要是对这一章进行梳理。
+
+# 内存模型
+
+C++ 使用三种（C++11中增加到4种）不同的方案来存储数据，这些方案的区别就在于数据保留在内存中的时间：
+
+1. 自动存储持续性
+2. 静态存储持续性
+3. 动态存储持续性
+
+*注：*C++11 中增加了第4种，线程存储持续性，本文不讨论
+
+接下来将会依次介绍这三种存储方案
+
+## 自动存储持续性
+
+在默认的情况下，在函数中声明的函数参数和变量的存储持续性为自动，作用域为局部，没有连接性。可以通过下面这个例子来说明：
+
+```c++
+#include <iostream>
+using namespace std;
+
+void oil(int x){
+	int texas = 5;
+
+	cout<<"在 oil() 中, texas的值为："<<texas<<"，texas的地址为："<<&texas<<endl;
+	cout<<"在 oil() 中, x的值为："<<x<<"，x的地址为："<<&x<<endl;
+
+	{
+		int texas = 13;
+		cout<<"在 block 中, texas的值为："<<texas<<"，texas的地址为："<<&texas<<endl;
+		cout<<"在 block 中, x的值为："<<x<<"，x地址为："<<&x<<endl;
+	}
+}
+
+int main(){
+	int texas = 31;
+	int year = 2016;
+	cout<<"在 main() 中, texas的值为："<<texas<<"，texas的地址为："<<&texas<<endl;
+	cout<<"在 main() 中, year的值为："<<year<<"，year的地址为："<<&year<<endl;
+
+	oil(texas);
+
+	return 0;
+}
+```
+
+![](http://7xrvqe.com1.z0.glb.clouddn.com/16-03-20-memory-model-namespace-stack%E4%BD%BF%E7%94%A8%E6%A0%88%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0.png)
+
+由于自动变量的数目随函数的开始和结束而增减，因此程序必须在运行时自动变量进行管理，常见的是使用栈来进行管理，下图截自《C++ Primer Plus（第6版）》308页，该图可以形象生动的说明其中的过程
+
+![](http://7xrvqe.com1.z0.glb.clouddn.com/16-03-20-memory-model-namespace%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png)
+
+最后，关于自动存储持续性，还有一点需要说明的是，可以使用 register 显式地指出变量是自动的， register 以前是用来建议编译器使用 CPU 寄存器来存储自动变量的，C++11 后废弃了这个用法，而成为指出变量是自动的关键字。
+
+## 静态持续变量
+
+# 命名空间
+
+### 参考文献
+《C++ Prime Plus(第六版)》
