@@ -277,5 +277,5 @@ int main(){
 extern "C" void func(int);
 ```
 
-### 参考文献
+### 参考资料
 《C++ Prime Plus(第六版)》
