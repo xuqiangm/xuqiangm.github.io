@@ -184,7 +184,7 @@ class Feeb{};
 
 同理，也可以通过 const 来提供部分具体化版本。
 
-# 3 模板别名（C++11）
+# 3. 模板别名（C++11）
 
 ```c++
 template <typename T>
