@@ -80,4 +80,127 @@ int main(){
 	Swap<double>(i,j);		//error，第一形参的类型为 double&，不能指向 int 变量 i
 }
 ```
-# 类模板
+# 2. 类模板
+
+## 2.1 递归使用模板
+
+```c++
+ArrayTP < ArrayTP<int,5>, 10> a;
+```
+
+## 2.2 使用多个类型参数
+
+```c++
+#include <iostream>
+#include <string>
+
+template <class T1, class T2>
+class Pair{
+private:
+    T1 a;
+    T2 b;
+public:
+    T1& first();
+    T2& second();
+    T1 first() const { return a; }
+    T2 second() const { return b; }
+    Pair(const T1& aval, const T2& bval):a(aval),b(bval){ }
+    Pair(){}
+};
+
+template<class T1, class T2>
+T1& Pair<T1,T2>::first(){
+    return a;
+}
+
+template<class T1, class T2>
+T2& Pair<T1,T2>::second(){
+    return b;
+}
+```
+
+## 2.3 默认类型模板参数
+
+类模板类型参数可以提供默认值，但是不能为函数模板提供默认值
+
+```c++
+template <typename T1, typename T2 = int>
+class XX{
+	...	
+};
+
+XX<double, double> m1;
+XX<double> m2;
+```
+
+## 2.4 模板的具体化（特化）
+
+### 2.4.1 隐式实例化
+
+```c++
+//编译器在需要对象之前，不会生成类的隐式实例化
+ArrayTP<double, 30>* pt;
+pt = new ArrayTP<double, 20>;	//此时导致编译器生成类定义，并根据该定义创建对象
+```
+
+### 2.4.2 显式实例化
+
+```c++
+template class ArrayTP<sting, 100>;  //虽然没有创建或提及类对象，编译器也将生成类声明（包括方法定义）
+```
+
+### 2.4.3 显式具体化
+
+```c++
+template <> class SortedArray<const char char*>
+{
+	...
+};
+```
+
+### 2.4.4 部分具体化（偏特化）
+
+第一种：
+
+```c++
+//普通的类模板
+template <class T1, class T2> class Pair{...};	
+
+template <class T1> class Pair<T1, int>{};
+//关键字 template 后面的<>声明的是没有被具体化的类型参数。因此，上述第二个声明将 T2 具体化为 int，但T1保持不变。注意，如果指定所有的类型，则<>内将为空，这将导致显式具体化
+```
+
+第二种：
+
+```c++
+template <typename T>
+class Feeb {};
+
+template <typename T*>
+class Feeb{};
+
+//上述通过指针提供特殊版本来部分具体化现有模板
+```
+
+同理，也可以通过 const 来提供部分具体化版本。
+
+# 3 模板别名（C++11）
+
+```c++
+template <typename T>
+using arrtype = std::array<T,12>;
+
+//也可以用于非模板，相当于 typedef
+using pc = const char*; //相当于 typedef const char* pc;
+```
+
+
+##  模板声明与定义不能分离
+
+在分离式编译的环境下，编译器编译某一个.cpp文件时并不知道另一个.cpp文件的存在，也不会去查找（当遇到未决符号时它会寄希望于连接器）。这种模式在没有模板的情况下运行良好，但遇到模板时就傻眼了，因为模板仅在需要的时候才会实例化出来，所以，当编译器只看到模板的声明时，它不能实例化该模板，只能创建一个具有外部连接的符号并期待连接器能够将符号的地址决议出来。然而当实现该模板的.cpp文件中没有用到模板的实例时，编译器懒得去实例化，所以，整个工程的.obj中就找不到一行模板实例的二进制代码，于是连接器也黔驴技穷了。
+
+### 参考资料
+
+- 《C++ Primer Plus（第六版）》
+- [c++编译器为什么不支持模板的分离式编译]{http://blog.csdn.net/bichenggui/article/details/4207084}
+
