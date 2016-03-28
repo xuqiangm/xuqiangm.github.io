@@ -202,5 +202,5 @@ using pc = const char*; //相当于 typedef const char* pc;
 ### 参考资料
 
 - 《C++ Primer Plus（第六版）》
-- [c++编译器为什么不支持模板的分离式编译]{http://blog.csdn.net/bichenggui/article/details/4207084}
+- [c++编译器为什么不支持模板的分离式编译](http://blog.csdn.net/bichenggui/article/details/4207084)
 
