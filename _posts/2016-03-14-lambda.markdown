@@ -1,7 +1,7 @@
 ---
 title: C++11新特性：Lambda表达式
 date: 2016-03-14
-categories: c++
+categories: C++
 ---
 
 
