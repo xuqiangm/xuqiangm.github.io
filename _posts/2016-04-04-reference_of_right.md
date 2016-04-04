@@ -247,7 +247,77 @@ int main(){
 
 # 3. 完美转发
 
+所谓完美转发（prefect forwarding），是指在函数模板中，完全依照模板的参数的类型，即传入的是左值对象，则转发对象获得的就是左值对象，传入的是右值对象，则转发对象获得的就是右值对象，而不产生额外的开销，就好像转发者不存在一样。
 
+C++11 通过引入“引用折叠”（reference collapsing）的新语言规则，并结合新的模板推到规则来完成完美转发。具体的折叠规则如下：
+
+TR 的类型定义 | 声明 v 的类型 | v 的实际类型
+--------------|---------------| ------------
+T& | TR | A&
+T& | TR& | A&
+T& | TR&& | A&
+T&& | TR | A&&
+T&& | TR& | AT&
+T&& | TR&& | A&&
+
+则转发函数可以写成如下形式：
+
+```c++
+template <typename T>
+void IamForwording(T&& t){
+	IrunCodeActually(static_cast<T&&>(t));
+}
+```
+
+在 C++11 中提供了专门的函数 forward。所以我们可以把转发函数写成这样：
+
+```c++
+template <typename T>
+void IamForwording(T&& t){
+	IrunCodeActually(forward(t));
+}
+```
+
+以下是一个完整的示例
+
+```c++
+#include <iostream>
+using namespace std;
+
+void RunCode(int&& m){
+	cout<<"rvalue ref"<<endl;
+}
+
+void RunCode(int& m){
+	cout<<"lvalue ref"<<endl;
+}
+
+void RunCode(const int&& m){
+	cout<<"const rvalue ref"<<endl;
+}
+
+void RunCode(const int& m){
+	cout<<"const lvalue ref"<<endl;
+}
+
+template <typename T>
+void PerfectForward(T&& t){
+	RunCode(forward<T>(t));
+}
+
+int main(){
+	int a;
+	int b;
+	const int c = 1;
+	const int d = 0;
+
+	PerfectForward(a);		//lvalue ref
+	PerfectForward(move(b));	//rvalue ref
+	PerfectForward(c);	//const lvalue ref
+	PerfectForward(move(d));	//const rvalue ref
+	return 0;
+}
+```
 
 ### 参考资料
 
