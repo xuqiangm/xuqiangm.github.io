@@ -17,7 +17,7 @@ template <typename T>
 void Swap(T& a, T& b);
 template <typename T>
 void Swap(T* a, T* b, int n);
-void Show(int a[]);
+void Swap(int a[]);
 ```
 
 上面的代码就出现了三种 Swap 函数的重载。
