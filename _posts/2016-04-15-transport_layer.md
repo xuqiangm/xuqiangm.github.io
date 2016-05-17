@@ -52,4 +52,6 @@ TCP 把链接作为最基本的抽象。每一条 TCP 链接唯一地被通信�
 
 > TCP 链接 ::= {socket1,socket2} = {(IP1:port), (IP2:port2)}
 
+下面将要介绍　TCP 头部
+
 
