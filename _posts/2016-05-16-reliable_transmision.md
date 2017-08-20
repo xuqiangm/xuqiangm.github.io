@@ -1,7 +1,7 @@
 ---
 title: 传输层（二） 可靠传输
 date: 2016-05-16
-categories: Network
+categories: 基础知识
 ---
 
 # 可靠传输的工作原理

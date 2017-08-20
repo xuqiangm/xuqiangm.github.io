@@ -1,7 +1,7 @@
 ---
 title: 传输层（三）：流量控制
 date: 2016-05-17
-categories: Network
+categories: 基础知识
 ---
 
 流量控制主要是通过滑动窗口来进行控制的。
