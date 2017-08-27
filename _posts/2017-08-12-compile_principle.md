@@ -176,8 +176,8 @@ struct token
 对于任意c∈Σ，c是正则表达式
 如果M和N是正则表达式，则以下也是正则表达式
 
-- 选择	M | N = {M, N}
-- 链接	MN = {mn | m∈M, n∈N}
+- 选择	M \| N = {M, N}
+- 链接	MN = {mn \| m∈M, n∈N}
 - 闭包	M* = {ε， M, MM, MMM, ...}
 
 **2.3.2 正则表达式的形式**
@@ -195,7 +195,7 @@ e --> ε
 可以引入更多的语法糖，来简化构造
 
 
-- [c1-cn] == c1|c2|...|cn
+- [c1-cn] == c1\|c2\|...\|cn
 - e+      == 一个或多个e
 - e?	  == 零个或多个e
 - "a*"    == a*自身，不是a的Kleen闭包
@@ -275,7 +275,7 @@ Thompson算法是基于对RE的结构做归纳的算法，对基本的RE直接�
 
 ![](http://7xrvqe.com1.z0.glb.clouddn.com/Thompson.svg)
 
-根据以上关系，可以根据正则表达式a(b|c)*推导出NFA
+根据以上关系，可以根据正则表达式a(b\|c)*推导出NFA
 
 ![](http://7xrvqe.com1.z0.glb.clouddn.com/Thompson-example.svg)
 
@@ -288,7 +288,7 @@ Thompson算法是基于对RE的结构做归纳的算法，对基本的RE直接�
 2. 对新集合中每一个节点求ε闭包
 
 
-对于3.1中a(b|c)*推导出的NFA，可以利用自己构造算法转化成DFA，具体过程如下：
+对于3.1中a(b\|c)*推导出的NFA，可以利用自己构造算法转化成DFA，具体过程如下：
 
 
 ```
