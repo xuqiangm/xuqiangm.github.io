@@ -490,6 +490,50 @@ F -> num
    | id
 ```
 
+<a name="anchor17"></a>
+### 4.4 自顶向下分析
+
+> 基本算法思想：从G的开始符号出发，随意推导出某个句子t，比较t和s，如果t==s，则回答“是”，否则回退再次比较。对应于分析树自顶向下的构造顺序。
+
+由于该算法需要用到回溯，给分析效率带来问题，引出了递归下降分析算法和LL(1)分析算法。
+
+<a name="anchor18"></a>
+### 4.5 递归下降分析
+
+> 算法基本思想是：每个非终结符构造一个分析函数，用前看符号指导产生式规则的选择。基本思想是利用分治的思想。
+
+例如：
+
+```
+S -> N V N
+N -> s
+   | t
+   | g
+   | w
+V -> e
+   | d
+```
+
+算法的伪代码为：
+
+```c++
+parse_S()
+	parse_N()
+	parse_V()
+	parse_N()
+
+parse_N()
+	token = tokens[i++]
+	if (token==s || token==t ||
+		token==g || token==w)
+		return ;
+	error("...");
+
+parse_V()
+	token = tokens[i++];
+	...
+```
+
 ### 参考
 
 - [编译原理(网易云课堂)](http://mooc.study.163.com/course/USTC-1000002001#/info)
